@@ -1,18 +1,23 @@
 from stats import (get_word_count, get_character_count, sorted)
+import sys
+
+if len(sys.argv) != 2:
+    print("Usage: python3 main.py <path_to_book>")
+    sys.exit(1)
 
 def get_book_text(book_file):
 
-    with open(book_file) as words:
-        book_words = words.read()
+        book_words = book_file.read()
         return book_words
 
 def main():
-    location = "books/frankenstein.txt"
-    text = get_book_text(f"./{location}")
-    word_count = get_word_count(text.split())
-    char_count = get_character_count(text.lower())
-    sort_count = sorted(char_count)
-    print_report(location, word_count, sort_count)
+
+    with open(sys.argv[1]) as location:
+        text = get_book_text(location)
+        word_count = get_word_count(text.split())
+        char_count = get_character_count(text.lower())
+        sort_count = sorted(char_count)
+        print_report(location, word_count, sort_count)
 
 
 def print_report(location, word_count, sort_count):
